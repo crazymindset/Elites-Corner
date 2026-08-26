@@ -290,9 +290,7 @@ card.querySelector(
 );
 
 
-card.addEventListener(
-'mouseover',
-function(){
+function applyHoverStyles(){
 
     card.style.transform =
     'scale(1.03)';
@@ -318,12 +316,10 @@ function(){
 
     });
 
-});
+}
 
 
-card.addEventListener(
-'mouseout',
-function(){
+function removeHoverStyles(){
 
     card.style.transform =
     'scale(1)';
@@ -349,7 +345,19 @@ function(){
 
     });
 
-});
+}
+
+
+card.addEventListener(
+    'mouseover',
+    applyHoverStyles
+);
+
+
+card.addEventListener(
+    'mouseout',
+    removeHoverStyles
+);
 
 
 /* =========================
@@ -785,17 +793,73 @@ function(){
 
     }
 
+});
+
+
 /* =========================
    FORCE INITIAL REFLOW
    (fixes layout not settling until first hover)
+
+   Moved to top level, outside any other event
+   handler, so it always registers. Also guards
+   against the 'load' event having already fired
+   before this script runs (common on cached
+   reloads or when the iframe paints fast).
 ========================= */
 
-window.addEventListener('load', function(){
-    setTimeout(function(){
-        void card.offsetHeight; // forces the browser to recompute layout
-    }, 50);
-});
-});
+function forceInitialSettle(){
+
+    setTimeout(
+    function(){
+
+        /* Step 1: apply the exact same style
+           mutations that a real mouseover does.
+           This is what actually settles the
+           marquee/font metrics - not a passive
+           layout read. */
+
+        applyHoverStyles();
+
+
+        /* Step 2: wait two animation frames
+           (lets the browser fully paint the
+           hover state at least once) then
+           revert back to resting styles, so
+           the card ends up looking normal but
+           with metrics already settled. */
+
+        requestAnimationFrame(
+        function(){
+
+            requestAnimationFrame(
+            function(){
+
+                removeHoverStyles();
+
+            });
+
+        });
+
+    },
+    50
+    );
+
+}
+
+
+if( document.readyState === 'complete' ){
+
+    forceInitialSettle();
+
+}else{
+
+    window.addEventListener(
+        'load',
+        forceInitialSettle
+    );
+
+}
+
 </script>
 
 </body>
