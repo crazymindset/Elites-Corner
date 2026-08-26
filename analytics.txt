@@ -1,4 +1,0 @@
-seen=0
-clicked=0
-unique_seen=0
-unique_clicked=0
