@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elite's Corner</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #312e2b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+#msg {
+    color: #f1c40f;
+    font-size: 14px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div id="msg">Taking you to Elite's Corner...</div>
+
+<script>
+var TRACKER = 'https://script.google.com/macros/s/AKfycbx9Qkt5oxRWXaXNLy_bsxlfsXgvsU2BQvRzPVJo7funf3P_Lw2dyzbW_TUx9GPNpZ_hBA/exec';
+var CLUB_URL = 'https://www.chess.com/club/elites-corner-2000-rapid-tournaments';
+
+function getVisitorId() {
+    var id = localStorage.getItem('elite_source_visitor_id');
+    if (!id) {
+        id = 'v_' + Math.random().toString(36).slice(2) + Date.now();
+        localStorage.setItem('elite_source_visitor_id', id);
+    }
+    return id;
+}
+
+// "?elite-corner" -> "elite-corner"
+function getSourceIdentifier() {
+    var search = window.location.search || '';
+    if (search.charAt(0) === '?') {
+        search = search.slice(1);
+    }
+    // in case anything ever appends &foo=bar after it
+    search = search.split('&')[0].split('=')[0];
+    return search;
+}
+
+var redirected = false;
+
+function goToClub() {
+    if (redirected) return;
+    redirected = true;
+    window.location.replace(CLUB_URL);
+}
+
+try {
+    var identifier = getSourceIdentifier();
+    var visitorId = getVisitorId();
+
+    var img = new Image();
+    img.onload = goToClub;
+    img.onerror = goToClub;
+    img.src = TRACKER +
+        '?event=source_click' +
+        '&source=' + encodeURIComponent(identifier) +
+        '&visitor_id=' + encodeURIComponent(visitorId);
+} catch (e) {
+    goToClub();
+}
+
+// Safety net — redirect within 300ms no matter what, even if the
+// tracking request is slow, blocked, or fails silently. Guarantees
+// this never gets in the way of someone joining the club.
+setTimeout(goToClub, 300);
+</script>
+
+</body>
+</html>
