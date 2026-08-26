@@ -10,8 +10,8 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
-    height: 250px !important;
-    min-height: 250px !important;
+    height: 215px !important;
+    min-height: 215px !important;
     background: #312e2b !important;
     background-color: #312e2b !important;
     overflow: hidden !important;
@@ -22,12 +22,12 @@ body {
 }
 
 #eliteCard {
-    width: 280px !important;
-    max-width: 280px !important;
-    height: 235px !important;
-    min-height: 235px !important;
+    width: 250px !important;
+    max-width: 250px !important;
+    height: 205px !important;
+    min-height: 205px !important;
     margin: 0 auto !important;
-    padding: 16px !important;
+    padding: 12px !important;
     background: #262522 !important;
     overflow: hidden !important;
 }
@@ -43,10 +43,11 @@ transition:0.4s cubic-bezier(0.175,0.885,0.32,1.275);
 font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
 font-size:16px;
 border:1px solid #000000;
-border-radius:25px;
-padding:16px;
-width:280px;
-height:235px;
+border-radius:22px;
+padding:12px;
+width:250px;
+height:205px;
+max-width:250px;
 margin:0 auto;
 box-shadow:0 0 15px #00ffff;
 transform:scale(1);
@@ -59,7 +60,7 @@ position:absolute;
 inset:0;
 z-index:0;
 overflow:hidden;
-border-radius:25px;
+border-radius:22px;
 pointer-events:none;
 "></div>
 
@@ -70,72 +71,82 @@ preload="none"
 data-idx="0">
 </audio>
 
-<div style="position:relative; z-index:2;">
+<div style="position:relative;z-index:2;">
 
-<div style="width:100%; overflow:hidden; text-align:center;">
+<div style="width:100%;overflow:hidden;text-align:center;">
 <marquee
 behavior="alternate"
 direction="left"
 scrollamount="5"
 scrolldelay="35"
 width="100%"
-style="color:#f1c40f; font-size:18px;">
+style="color:#f1c40f;font-size:17px;">
 Events Schedule
 </marquee>
 </div>
 
-<p style="text-align:left; margin:10px 0 6px 0;">
+<p style="text-align:left;margin:5px 0 3px 0;">
 <strong>
-<span style="font-size:24px;">&middot; </span>
+<span style="font-size:20px;">&middot; </span>
 </strong>
 <strong
 class="schedule-text"
-style="font-size:14px; color:#aaaaaa;">
+style="font-size:13px;color:#aaaaaa;">
 Elite Saturday
 </strong>
 </p>
 
 <p
 class="schedule-text"
-style="text-align:left; font-size:14px; color:#aaaaaa; margin:5px 0;">
+style="
+text-align:left;
+font-size:13px;
+color:#aaaaaa;
+margin:3px 0;
+">
 Every Saturday - 18:00 UTC
 </p>
 
 <p
 class="schedule-text"
-style="text-align:left; font-size:14px; color:#aaaaaa; margin:5px 0;">
+style="
+text-align:left;
+font-size:13px;
+color:#aaaaaa;
+margin:3px 0;
+">
 10+0 Swiss | 3 rounds
 </p>
 
-<p style="text-align:left; margin:8px 0;">
+<p style="text-align:left;margin:4px 0;">
 <strong>
-<span style="font-size:24px;">&middot; </span>
+<span style="font-size:20px;">&middot; </span>
 </strong>
 <strong
 class="schedule-text"
-style="font-size:14px; color:#aaaaaa;">
+style="font-size:13px;color:#aaaaaa;">
 More to come...
 </strong>
 </p>
 
 <div
 style="
-margin-top:10px;
-padding-top:8px;
+margin-top:6px;
+padding-top:6px;
 border-top:1px solid rgba(241,196,15,.25);
 text-align:center;
-min-height:45px;
+min-height:35px;
 ">
 
 <div
 id="countdownStart"
 style="
 display:block;
-font-size:13px;
+font-size:12px;
 font-weight:600;
 color:#f1c40f;
 cursor:pointer;
-padding:6px 0;
+padding:4px 0;
 text-shadow:0 0 8px rgba(241,196,15,.35);
 ">
 CLICK TO SHOW COUNTDOWN
@@ -145,11 +156,11 @@ CLICK TO SHOW COUNTDOWN
 id="countdownLabel"
 style="
 display:none;
-font-size:12px;
+font-size:11px;
 font-weight:bold;
 color:#f1c40f;
 letter-spacing:1px;
-margin-bottom:4px;
+margin-bottom:2px;
 text-shadow:0 0 8px rgba(241,196,15,.35);
 ">
 NEXT EVENT IN
@@ -159,12 +170,12 @@ NEXT EVENT IN
 id="eliteCountdown"
 style="
 display:none;
-font-size:17px;
+font-size:15px;
 font-weight:600;
 color:#f1c40f;
 letter-spacing:.5px;
 text-shadow:0 0 8px rgba(241,196,15,.35);
-padding:3px 0 6px;
+padding:2px 0 4px;
 ">
 5d&nbsp;&nbsp;08h&nbsp;&nbsp;15m&nbsp;&nbsp;58s
 </div>
@@ -174,11 +185,11 @@ id="eliteMusicControl"
 data-state="on"
 style="
 display:none;
-font-size:12px;
+font-size:11px;
 font-weight:600;
 color:#f1c40f;
 cursor:pointer;
-padding:3px 0 6px;
+padding:2px 0 4px;
 text-shadow:0 0 8px rgba(241,196,15,.35);
 ">
 🎵 MUSIC ON
@@ -200,13 +211,18 @@ var TRACKER =
 
 function getVisitorId(){
 
-    var id = localStorage.getItem('elite_visitor_id');
+    var id =
+    localStorage.getItem(
+        'elite_visitor_id'
+    );
 
     if(!id){
 
         id =
         'v_' +
-        Math.random().toString(36).slice(2) +
+        Math.random()
+        .toString(36)
+        .slice(2) +
         Date.now();
 
         localStorage.setItem(
@@ -227,16 +243,19 @@ function track(eventName){
 
     try{
 
-        var img = new Image();
+        var img =
+        new Image();
 
         img.src =
-            TRACKER +
-            '?event=' +
-            encodeURIComponent(eventName) +
-            '&visitor_id=' +
-            encodeURIComponent(
-                getVisitorId()
-            );
+        TRACKER +
+        '?event=' +
+        encodeURIComponent(
+            eventName
+        ) +
+        '&visitor_id=' +
+        encodeURIComponent(
+            getVisitorId()
+        );
 
     }catch(e){}
 
@@ -255,10 +274,14 @@ track('seen');
 ========================= */
 
 var card =
-document.getElementById('eliteCard');
+document.getElementById(
+    'eliteCard'
+);
 
 var marqueeEl =
-card.querySelector('marquee');
+card.querySelector(
+    'marquee'
+);
 
 
 card.addEventListener(
@@ -275,13 +298,17 @@ function(){
         marqueeEl.stop();
 
     card
-    .querySelectorAll('.schedule-text')
-    .forEach(function(e){
+    .querySelectorAll(
+        '.schedule-text'
+    )
+    .forEach(
+    function(e){
 
-        e.style.color = '';
+        e.style.color =
+        '';
 
         e.style.fontSize =
-        '15.5px';
+        '14px';
 
     });
 
@@ -302,14 +329,17 @@ function(){
         marqueeEl.start();
 
     card
-    .querySelectorAll('.schedule-text')
-    .forEach(function(e){
+    .querySelectorAll(
+        '.schedule-text'
+    )
+    .forEach(
+    function(e){
 
         e.style.color =
         '#aaaaaa';
 
         e.style.fontSize =
-        '14px';
+        '13px';
 
     });
 
@@ -317,7 +347,7 @@ function(){
 
 
 /* =========================
-   MUSIC PLAYLIST
+   MUSIC
 ========================= */
 
 var pl = [
@@ -355,16 +385,13 @@ function(){
             ) + 1
         ) % pl.length;
 
-
         audioEl.setAttribute(
             'data-idx',
             i
         );
 
-
         audioEl.src =
         pl[i];
-
 
         audioEl.play();
 
@@ -374,7 +401,7 @@ function(){
 
 
 /* =========================
-   GLOW BLOBS
+   GLOW
 ========================= */
 
 var glowLayer =
@@ -388,14 +415,14 @@ function spawnGlassGlow(){
     if(!glowLayer)
         return;
 
-
     var blob =
-    document.createElement('div');
-
+    document.createElement(
+        'div'
+    );
 
     var size =
-    140 +
-    Math.random() * 180;
+    100 +
+    Math.random() * 120;
 
 
     var gradients = {
@@ -413,7 +440,9 @@ function spawnGlassGlow(){
 
 
     var keys =
-    Object.keys(gradients);
+    Object.keys(
+        gradients
+    );
 
 
     var chosen =
@@ -426,11 +455,11 @@ function spawnGlassGlow(){
 
 
     var driftX =
-    Math.random() * 60 - 30;
+    Math.random() * 40 - 20;
 
 
     var driftY =
-    Math.random() * 60 - 30;
+    Math.random() * 40 - 20;
 
 
     blob.style.cssText =
@@ -459,7 +488,7 @@ function spawnGlassGlow(){
         gradients[chosen] +
         ',transparent 70%);' +
 
-        'filter:blur(30px);' +
+        'filter:blur(25px);' +
 
         'opacity:0;' +
 
@@ -468,7 +497,9 @@ function spawnGlassGlow(){
         'transition:opacity 4s ease,transform 9s cubic-bezier(.2,.6,.4,1);';
 
 
-    glowLayer.appendChild(blob);
+    glowLayer.appendChild(
+        blob
+    );
 
 
     setTimeout(
@@ -478,7 +509,7 @@ function spawnGlassGlow(){
         '.70';
 
         blob.style.transform =
-        'scale(1.5) translate(' +
+        'scale(1.4) translate(' +
         driftX +
         'px,' +
         driftY +
@@ -513,10 +544,9 @@ function spawnGlassGlow(){
 
 
 setInterval(
-spawnGlassGlow,
-2400
+    spawnGlassGlow,
+    2400
 );
-
 
 spawnGlassGlow();
 
@@ -526,12 +556,13 @@ spawnGlassGlow();
 ========================= */
 
 document
-.getElementById('countdownStart')
+.getElementById(
+    'countdownStart'
+)
 .addEventListener(
 'click',
 function(){
 
-    /* CLICK ANALYTICS */
     track('click');
 
 
@@ -554,10 +585,8 @@ function(){
     button.style.display =
     'none';
 
-
     label.style.display =
     'block';
-
 
     countdown.style.display =
     'block';
@@ -592,7 +621,6 @@ function(){
                 18,
                 0,
                 0
-
             )
         );
 
@@ -649,23 +677,23 @@ function(){
 
         countdown.innerHTML =
 
-            days +
-            'd&nbsp;&nbsp;' +
+        days +
+        'd&nbsp;&nbsp;' +
 
-            String(hours)
-            .padStart(2,'0') +
+        String(hours)
+        .padStart(2,'0') +
 
-            'h&nbsp;&nbsp;' +
+        'h&nbsp;&nbsp;' +
 
-            String(minutes)
-            .padStart(2,'0') +
+        String(minutes)
+        .padStart(2,'0') +
 
-            'm&nbsp;&nbsp;' +
+        'm&nbsp;&nbsp;' +
 
-            String(seconds)
-            .padStart(2,'0') +
+        String(seconds)
+        .padStart(2,'0') +
 
-            's';
+        's';
 
     }
 
@@ -732,10 +760,8 @@ function(){
             'off'
         );
 
-
         c.innerHTML =
         '🔇 MUSIC OFF';
-
 
         audioEl.pause();
 
@@ -746,10 +772,8 @@ function(){
             'on'
         );
 
-
         c.innerHTML =
         '🎵 MUSIC ON';
-
 
         audioEl.play();
 
@@ -760,5 +784,4 @@ function(){
 </script>
 
 </body>
-</html>
 </html>
