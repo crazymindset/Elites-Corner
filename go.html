@@ -2,29 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elite's Corner</title>
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #312e2b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-}
-#msg {
-    color: #f1c40f;
-    font-size: 14px;
-    text-align: center;
-}
-</style>
 </head>
 <body>
-
-<div id="msg">Taking you to Elite's Corner...</div>
 
 <script>
 var TRACKER = 'https://script.google.com/macros/s/AKfycbx9Qkt5oxRWXaXNLy_bsxlfsXgvsU2BQvRzPVJo7funf3P_Lw2dyzbW_TUx9GPNpZ_hBA/exec';
@@ -45,7 +25,6 @@ function getSourceIdentifier() {
     if (search.charAt(0) === '?') {
         search = search.slice(1);
     }
-    // in case anything ever appends &foo=bar after it
     search = search.split('&')[0].split('=')[0];
     return search;
 }
@@ -73,10 +52,10 @@ try {
     goToClub();
 }
 
-// Safety net — redirect within 300ms no matter what, even if the
-// tracking request is slow, blocked, or fails silently. Guarantees
-// this never gets in the way of someone joining the club.
-setTimeout(goToClub, 300);
+// Fires the redirect almost immediately regardless of whether the
+// tracking request finished — nothing is shown on screen either way,
+// so there's no visible "waiting" state, just a near-instant jump.
+setTimeout(goToClub, 120);
 </script>
 
 </body>
