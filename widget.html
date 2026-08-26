@@ -785,6 +785,15 @@ function(){
 
     }
 
+/* =========================
+   FORCE INITIAL REFLOW
+   (fixes layout not settling until first hover)
+========================= */
+
+window.addEventListener('load', function(){
+    setTimeout(function(){
+        void card.offsetHeight; // forces the browser to recompute layout
+    }, 50);
 });
 
 </script>
