@@ -461,6 +461,9 @@ this.style.transform='translateY(0)';
 ">WINNERS</div>
 <!-- =================================================
      VOTE BUTTON
+     (also does the lazy one-time setup of the vote
+     submit/restore helpers, shared by every vote option
+     button on the Vote screen)
      ================================================= -->
 <div onclick="
 document.getElementById('eliteHomeScreen').style.display='none';
@@ -566,6 +569,9 @@ this.style.transform='translateY(0)';
 ">VOTE</div>
 <!-- =================================================
      PLAYLIST BUTTON
+     (also does the lazy one-time setup of the shared
+     hover/active helpers + starts music on THIS real
+     click — required so autoplay is allowed by the browser)
      ================================================= -->
 <div onclick="
 document.getElementById('eliteHomeScreen').style.display='none';
@@ -637,6 +643,22 @@ this.style.transform='translateY(0)';
      ===================================================== -->
 <div id="eliteAnnouncementsScreen" style="display: none;">
 <div style="width: 105%; margin-left: -2.5%; overflow: hidden; text-align: center; margin-bottom: 5px;"><marquee behavior="alternate" direction="left" scrollamount="5" scrolldelay="35" width="100%" style="color: #e6bd45; font-size: 20px;"> Announcements </marquee></div>
+<!-- =====================================================
+     HOW TO ADD A NEW ANNOUNCEMENT
+     =====================================================
+     Copy ONE full block below (from the opening
+     <div class="eliteAnnouncementItem"> to its matching
+     closing </div>), paste it as a NEW item right under
+     <div id="eliteAnnouncementsList">, then edit only:
+       - the date text (e.g. "29/8/2026")
+       - the short title text (e.g. "New club event")
+       - the full announcement text inside eliteAnnouncementBody
+     Newest announcement should go on TOP of the list.
+     Leave data-open="1" on the newest one (so it opens
+     expanded by default) and data-open="0" on older ones
+     (so they start collapsed) — the onclick below reads
+     this automatically, you don't need to change any JS.
+     ===================================================== -->
 <div id="eliteAnnouncementsList">
 <!-- ================= ANNOUNCEMENT ITEM ================= -->
 <div class="eliteAnnouncementItem" data-open="1" style="margin-top: 8px;">
@@ -693,26 +715,45 @@ this.style.transform='translateY(0)';
 <!-- =====================================================
      EVENTS SCHEDULE SCREEN
      ===================================================== -->
-<div id="eliteEventsScreen" style="display: none;">
+<div id="eliteEventsScreen" style="display: none;"><!-- TITLE -->
 <div style="width: 105%; margin-left: -2.5%; overflow: hidden; text-align: center;"><marquee behavior="alternate" direction="left" scrollamount="5" scrolldelay="35" width="100%" style="color: #e6bd45; font-size: 20px;"> Events Schedule </marquee></div>
+<!-- EVENT -->
 <p style="text-align: left; margin-bottom: 5px;"><strong> <span style="font-size: 24px;">&middot;</span> </strong> <strong id="eventNameDisplay" class="schedule-text" style="font-size: 14px; color: #aaaaaa;">Elite Saturday</strong></p>
+<!-- EVENT DAY + TIME -->
 <p id="eventDateDisplay" class="schedule-text" style="text-align: left; font-size: 14px; color: #aaaaaa; margin-top: 0;">Every Saturday - 18:00 UTC</p>
+<!-- FORMAT -->
 <p class="schedule-text" style="text-align: left; font-size: 14px; color: #aaaaaa;">10+0 Swiss | 3 rounds</p>
+<!-- MORE EVENTS -->
 <p style="text-align: left;"><strong> <span style="font-size: 24px;">&middot;</span> </strong> <strong class="schedule-text" style="font-size: 14px; color: #aaaaaa;"> More to come... </strong></p>
 <!-- =================================================
      COUNTDOWN SECTION
      ================================================= -->
-<div id="countdownSection" style="margin-top: 12px; padding-top: 10px; text-align: center; min-height: 45px;">
+<div id="countdownSection" style="margin-top: 12px; padding-top: 10px; text-align: center; min-height: 45px;"><!-- FIRST SEPARATOR -->
 <div id="firstSeparator" style="display: block; margin-bottom: 10px; border-top: 1px solid rgba(241,196,15,.25);"></div>
+<!-- =================================================
+     COUNTDOWN LABEL
+     ================================================= -->
 <div id="countdownLabel" style="display: block; font-size: 12px; font-weight: bold; color: #e6bd45; letter-spacing: 1px; margin-bottom: 4px; text-shadow: 0 0 8px rgba(241,196,15,.35);">NEXT EVENT IN</div>
+<!-- =================================================
+     COUNTDOWN
+     ================================================= -->
 <div id="eliteCountdown" style="display: block; font-size: 17px; font-weight: 600; color: #e6bd45; letter-spacing: .5px; text-shadow: 0 0 8px rgba(241,196,15,.35); padding: 3px 0 8px;">0d&nbsp;&nbsp;07h&nbsp;&nbsp;07m&nbsp;&nbsp;28s</div>
-<div id="eliteNextEvent" style="display: block; margin-top: 2px; padding-top: 8px; text-align: center;">
+<!-- =================================================
+     NEXT EVENT
+     ================================================= -->
+<div id="eliteNextEvent" style="display: block; margin-top: 2px; padding-top: 8px; text-align: center;"><!-- PREMIUM EVENT NAME -->
 <div id="nextEventName" style="font-family: Georgia,'Times New Roman',serif; font-size: 19px; font-weight: bold; color: #e6bd45; letter-spacing: 1px; margin-bottom: 9px; text-shadow: 0 0 8px rgba(241,196,15,.35),0 0 18px rgba(241,196,15,.12);">Elite Saturday</div>
+<!-- =================================================
+     JOIN EVENT BUTTON
+     ================================================= -->
 <div id="joinEventButton" data-url="https://www.chess.com/play/tournament/31067417?action=joinTournament" onclick="
+
 var url=this.getAttribute('data-url');
+
 if(url){
 window.location.href=url;
 }
+
 " style="display: inline-block; font-family: Georgia,'Times New Roman',serif; font-size: 12.5px; font-weight: bold; letter-spacing: 1.8px; text-transform: uppercase; color: #f1c40f; cursor: pointer; padding: 7px 16px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
 this.style.background='rgba(241,196,15,.16)';
 this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
@@ -729,7 +770,11 @@ this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
 this.style.transform='translateY(0)';
 ">JOIN EVENT</div>
 </div>
+<!-- SECOND HORIZONTAL LINE -->
 <div id="secondSeparator" style="display: block; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(241,196,15,.20);"></div>
+<!-- =================================================
+     BACK TO HOME
+     ================================================= -->
 <div onclick="
 document.getElementById('eliteEventsScreen').style.display='none';
 document.getElementById('eliteHomeScreen').style.display='block';
@@ -753,13 +798,46 @@ this.style.transform='translateY(0)';
 <!-- =====================================================
      WINNERS SCREEN
      ===================================================== -->
-<div id="eliteWinnersScreen" style="display: none;">
+<div id="eliteWinnersScreen" style="display: none;"><!-- TITLE -->
 <div style="width: 105%; margin-left: -2.5%; overflow: hidden; text-align: center; margin-bottom: 5px;"><marquee behavior="alternate" direction="left" scrollamount="5" scrolldelay="35" width="100%" style="color: #e6bd45; font-size: 20px;"> List of Winners </marquee></div>
+<!-- =====================================================
+     HOW TO ADD A NEW WINNER
+     =====================================================
+     Copy ONE full block below (from the opening
+     <div class="eliteWinnerItem"> to its matching
+     closing </div>), paste it as a NEW item right under
+     <div id="eliteWinnersList">, then edit only:
+       - the date text (e.g. "29/8/2026")
+       - the event name text (e.g. "Elite Saturday")
+       - the winner's name text
+       - the data-url on the VIEW PROFILE button — their
+         chess.com profile link, e.g.
+         https://www.chess.com/member/USERNAME
+     Newest winner should go on TOP of the list.
+     ===================================================== -->
 <div id="eliteWinnersList">
 <!-- ================= WINNER ITEM ================= -->
 <div class="eliteWinnerItem" style="margin-top: 8px; padding: 10px 12px; text-align: left; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04);">
 <div style="font-size: 13px; font-weight: 600; color: #f1c40f; text-shadow: 0 0 8px rgba(241,196,15,.35); margin-bottom: 4px;">5/9/2026 &middot; Elite Saturday</div>
 <div style="font-size: 14px; color: #aaaaaa; margin-bottom: 8px;">Winner: <span style="color: #e67e23;"><!--Winner Name--></span></div>
+<!--<div data-url="https://www.chess.com/member/USERNAME" onclick="
+var url=this.getAttribute('data-url');
+if(url){
+window.open(url,'_blank');
+}
+" style="display: inline-block; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 6px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .5px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+">VIEW PROFILE</div>-->
 </div>
 <!-- =============== END WINNER ITEM =============== -->
 </div>
@@ -768,6 +846,177 @@ this.style.transform='translateY(0)';
 document.getElementById('eliteWinnersScreen').style.display='none';
 document.getElementById('eliteHomeScreen').style.display='block';
 " style="display: inline-block; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 2px 5px; margin-top: 15px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .5px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+this.style.transform='translateY(-2px)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+this.style.transform='translateY(0)';
+">&larr; BACK</div>
+</div>
+<!-- =====================================================
+     VOTE SCREEN
+     ===================================================== -->
+<div id="eliteVoteScreen" style="display: none;"><!-- TITLE -->
+<div style="width: 105%; margin-left: -2.5%; overflow: hidden; text-align: center; margin-bottom: 5px;"><marquee id="eliteVoteMarquee" behavior="alternate" direction="left" scrollamount="5" scrolldelay="35" width="100%" style="color: #e6bd45; font-size: 20px;"><span id="eliteVoteMarqueeText"> Voting Preview </span></marquee></div>
+<!-- DESCRIPTION -->
+<div class="eliteMenuText" style="text-align: left; font-size: 14px; color: #aaaaaa; line-height: 1.55; margin-bottom: 18px; transition: .2s ease;">Vote for the format of our future events and help decide how they should be organized.</div>
+<!-- VOTE CATEGORIES LIST -->
+<div id="eliteVoteCategoryList">
+
+<!-- CATEGORY 1: TOURNAMENT TYPE -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+"><span>Tournament Type</span><span class="eliteVoteCategoryArrow">&#9656;</span></div>
+<div class="eliteVoteCategoryBody" style="display: none; padding: 10px 6px 4px 6px;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="eliteVoteOptionBtn" data-category="tournamenttype" data-value="Swiss" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('tournamenttype','Swiss',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">Swiss</div>
+<div class="eliteVoteOptionBtn" data-category="tournamenttype" data-value="Arena" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('tournamenttype','Arena',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">Arena</div>
+</div>
+</div>
+</div>
+
+<!-- CATEGORY 2: DAY -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+"><span>Day</span><span class="eliteVoteCategoryArrow">&#9656;</span></div>
+<div class="eliteVoteCategoryBody" style="display: none; padding: 10px 6px 4px 6px;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="eliteVoteOptionBtn" data-category="day" data-value="Friday" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('day','Friday',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">Friday</div>
+<div class="eliteVoteOptionBtn" data-category="day" data-value="Saturday" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('day','Saturday',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">Saturday</div>
+<div class="eliteVoteOptionBtn" data-category="day" data-value="Sunday" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('day','Sunday',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">Sunday</div>
+</div>
+</div>
+</div>
+
+<!-- CATEGORY 3: START TIME -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+"><span>Start Time</span><span class="eliteVoteCategoryArrow">&#9656;</span></div>
+<div class="eliteVoteCategoryBody" style="display: none; padding: 10px 6px 4px 6px;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="eliteVoteOptionBtn" data-category="starttime" data-value="16:00 UTC" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('starttime','16:00 UTC',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">16:00 UTC</div>
+<div class="eliteVoteOptionBtn" data-category="starttime" data-value="20:00 UTC" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('starttime','20:00 UTC',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">20:00 UTC</div>
+<div class="eliteVoteOptionBtn" data-category="starttime" data-value="00:00 UTC" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('starttime','00:00 UTC',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">00:00 UTC</div>
+</div>
+</div>
+</div>
+
+<!-- CATEGORY 4: TIME CONTROL -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+"><span>Time Control</span><span class="eliteVoteCategoryArrow">&#9656;</span></div>
+<div class="eliteVoteCategoryBody" style="display: none; padding: 10px 6px 4px 6px;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="eliteVoteOptionBtn" data-category="timecontrol" data-value="10+0" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('timecontrol','10+0',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">10+0</div>
+<div class="eliteVoteOptionBtn" data-category="timecontrol" data-value="10+2" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('timecontrol','10+2',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">10+2</div>
+<div class="eliteVoteOptionBtn" data-category="timecontrol" data-value="Longer TC" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('timecontrol','Longer TC',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">Longer TC</div>
+</div>
+</div>
+</div>
+
+<!-- CATEGORY 5: SWISS ROUNDS -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+"><span>Swiss Rounds</span><span class="eliteVoteCategoryArrow">&#9656;</span></div>
+<div class="eliteVoteCategoryBody" style="display: none; padding: 10px 6px 4px 6px;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="eliteVoteOptionBtn" data-category="swissrounds" data-value="3-4" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('swissrounds','3-4',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">3-4</div>
+<div class="eliteVoteOptionBtn" data-category="swissrounds" data-value="5-6" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('swissrounds','5-6',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">5-6</div>
+<div class="eliteVoteOptionBtn" data-category="swissrounds" data-value="7+" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('swissrounds','7+',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">7+</div>
+</div>
+</div>
+</div>
+
+<!-- CATEGORY 6: DURATION -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
+this.style.background='rgba(241,196,15,.16)';
+this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
+this.style.borderColor='rgba(241,196,15,.9)';
+this.style.color='#ffe58a';
+this.style.textShadow='0 0 12px rgba(241,196,15,.6)';
+" onmouseout="
+this.style.background='rgba(241,196,15,.08)';
+this.style.boxShadow='0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04)';
+this.style.borderColor='rgba(241,196,15,.55)';
+this.style.color='#f1c40f';
+this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
+"><span>Duration</span><span class="eliteVoteCategoryArrow">&#9656;</span></div>
+<div class="eliteVoteCategoryBody" style="display: none; padding: 10px 6px 4px 6px;">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="eliteVoteOptionBtn" data-category="duration" data-value="1h" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('duration','1h',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">1h</div>
+<div class="eliteVoteOptionBtn" data-category="duration" data-value="1.5h" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('duration','1.5h',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">1.5h</div>
+<div class="eliteVoteOptionBtn" data-category="duration" data-value="2h" data-selected="0" onclick="if(window.eliteSubmitVote){window.eliteSubmitVote('duration','2h',this);}" style="flex: 1 1 auto; text-align: center; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 14px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.16)';this.style.borderColor='rgba(241,196,15,.9)';this.style.color='#ffe58a';}" onmouseout="if(this.getAttribute('data-selected')!=='1'){this.style.background='rgba(241,196,15,.08)';this.style.borderColor='rgba(241,196,15,.55)';this.style.color='#f1c40f';}">2h</div>
+</div>
+</div>
+</div>
+
+<!-- CATEGORY 7: PAIRING METHOD -->
+<div class="eliteVoteCategoryItem" data-open="0" style="margin-top: 8px;">
+<div class="eliteVoteCategoryHeader" onclick="if(window.eliteToggleVote){window.eliteToggleVote(this);}" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 13px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 8px 12px; border: 1px solid rgba(241,196,15,.5); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .3px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
 this.style.background='rgba(241,196,15,.16)';
 this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
 this.style.borderColor='rgba(241,196,15,.9)';
@@ -787,6 +1036,7 @@ this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
 </div>
 </div>
 </div>
+
 </div>
 <!-- BACK -->
 <div onclick="
@@ -811,10 +1061,15 @@ this.style.transform='translateY(0)';
 <!-- =====================================================
      PLAYLIST SCREEN
      ===================================================== -->
-<div id="elitePlaylistScreen" style="display: none;">
+<div id="elitePlaylistScreen" style="display: none;"><!-- TITLE -->
 <div style="width: 105%; margin-left: -2.5%; overflow: hidden; text-align: center; margin-bottom: 5px;"><marquee behavior="alternate" direction="left" scrollamount="5" scrolldelay="35" width="100%" style="color: #e6bd45; font-size: 20px;"> Playlist for gaming </marquee></div>
+<!-- DESCRIPTION -->
 <div class="eliteMenuText" style="text-align: left; font-size: 14px; color: #aaaaaa; line-height: 1.55; margin-bottom: 18px; transition: .2s ease;">Music to help you focus, play and enjoy your chess games.</div>
+<!-- SONG URL DATA (single source, read by the song buttons / auto-advance below) -->
 <div id="elitePlaylistData" data-songs="https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/GamingMusicForStreaming-ezgif.com-mp4-to-mp3-converter.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/HipHopLoFiStreamingMusic-ezgif.com-mp4-to-mp3-converter.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/LoFiGameStreamingMusic-ezgif.com-mp4-to-mp3-converter.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/spacewalk.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/5After All (Instrumental Version)_3.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/6All%20Is%20Good.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/7MIA.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/8Ocean%20View.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/9Don%E2%80%99t%20Understand.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/10Drifter.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/11Driving%20in%20the%20Dark.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/12Imaginary%20Friends.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/13M%C3%A9nage%20%C3%A0%20Trois.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/14nous.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/15Quiet%20in%20the%20Garden.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/16Timothy%20Infinite%20-%20Stagnant.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/17The%20Game%20%5BInstrumental%20Version%5D%20by%20Paisley%20Pink%20-%20%5BBeats%20Music%5D.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/18You%20Always%20Will.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/19Your%20Vibe.mp3|https://raw.githubusercontent.com/crazymindset/Elites-Corner/main/20Then%20I%20Go.mp3" style="display: none;"></div>
+<!-- =================================================
+     SONG BUTTONS GRID
+     ================================================= -->
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;">
 <div id="songBtn1" class="eliteSongBtn" data-idx="0" data-active="0" style="display:block;box-sizing:border-box;width:100%;text-align:center;font-size:12px;font-weight:600;color:#f1c40f;cursor:pointer;padding:7px 16px;border:1px solid rgba(241,196,15,.55);border-radius:7px;background:rgba(241,196,15,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04);letter-spacing:.5px;text-shadow:0 0 8px rgba(241,196,15,.35);transition:.2s ease;" onmouseover="if(window.eliteHoverOn)window.eliteHoverOn(this);" onmouseout="if(window.eliteHoverOff)window.eliteHoverOff(this);" onclick="
 var a=document.getElementById('eliteAudioPlayer');
@@ -1041,29 +1296,51 @@ if(mc){mc.setAttribute('data-state','on');mc.innerHTML='🎵 MUSIC ON';}
      MUSIC ON/OFF
      ================================================= -->
 <div id="elitePlaylistMusicControl" data-state="on" onclick="
+
 var c=this;
+
 var a=document.getElementById('eliteAudioPlayer');
+
 if(c.getAttribute('data-state')==='on'){
+
 c.setAttribute('data-state','off');
+
 c.innerHTML='🔇 MUSIC OFF';
+
 a.pause();
+
 }else{
+
 c.setAttribute('data-state','on');
+
 c.innerHTML='🎵 MUSIC ON';
+
 if(a.getAttribute('src')){
+
 a.play();
+
 }else{
+
 var pl=document.getElementById('elitePlaylistData').getAttribute('data-songs').split('|');
+
 a.setAttribute('data-idx','0');
+
 a.src=pl[0];
+
 a.play();
+
 window.eliteMusicStarted=true;
+
 var firstBtn=document.getElementById('songBtn1');
+
 if(firstBtn && window.eliteMarkActive){
 window.eliteMarkActive(firstBtn);
 }
+
 }
+
 }
+
 " style="display: inline-block; font-size: 12px; font-weight: 600; color: #f1c40f; cursor: pointer; padding: 7px 16px; margin-top: 12px; border: 1px solid rgba(241,196,15,.55); border-radius: 7px; background: rgba(241,196,15,.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 0 8px rgba(241,196,15,.15),inset 0 0 8px rgba(241,196,15,.04); letter-spacing: .5px; text-shadow: 0 0 8px rgba(241,196,15,.35); transition: .2s ease;" onmouseover="
 this.style.background='rgba(241,196,15,.16)';
 this.style.boxShadow='0 0 14px rgba(241,196,15,.35),inset 0 0 10px rgba(241,196,15,.08)';
@@ -1078,7 +1355,9 @@ this.style.borderColor='rgba(241,196,15,.55)';
 this.style.color='#f1c40f';
 this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
 ">🎵 MUSIC ON</div>
-<!-- BACK -->
+<!-- =================================================
+     BACK TO HOME
+     ================================================= -->
 <div onclick="
 document.getElementById('elitePlaylistScreen').style.display='none';
 document.getElementById('eliteHomeScreen').style.display='block';
@@ -1099,22 +1378,31 @@ this.style.textShadow='0 0 8px rgba(241,196,15,.35)';
 </div>
 <!-- =====================================================
      AUDIO PLAYER
-     ===================================================== -->
-<audio style="display: none;" id="eliteAudioPlayer" preload="none" data-idx="0" onended="
+     ===================================================== --> <audio style="display: none;" id="eliteAudioPlayer" preload="none" data-idx="0" onended="
+
 try{
+
 var a=this;
+
 var pl=document.getElementById('elitePlaylistData').getAttribute('data-songs').split('|');
+
 var i=
 (parseInt(a.getAttribute('data-idx'),10)+1)
 %pl.length;
+
 a.setAttribute('data-idx',i);
+
 a.src=pl[i];
+
 a.play();
+
 var nextBtn=document.getElementById('songBtn'+(i+1));
+
 if(nextBtn && window.eliteMarkActive){
 window.eliteMarkActive(nextBtn);
 }
+
 }catch(e){}
-"></audio>
-</div>
+
+"></audio></div>
 </div>
